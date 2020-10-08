@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>FazenTECH - Monitoramento Animais Doentes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilo.css">
+        <script src="js/util.js"></script>
+    </head>
+    <body style="background-image: url('img/bg1.jpg'); background-repeat: no-repeat; background-size: 100% 100%; background-attachment: fixed;">
+        <div id="mainDiv">
+            <header style="font-size: 30px;"><span id="titleSpan">FazenTECH</span>
+                <p>
+                    <span id="titleSpan" style="color: white; font-size: 45px">Controle de Animais Doentes</span>
+                </p>
+            </header>
+        </div>
+        </br>
+        <div class="regularDiv">
+            <input type="radio" id="radioCadastro" name="funcao" checked value="cadastro" onchange="ChangeSelect()">
+            <label for="radioCadastro" class="label">Cadastro</label><br>
+            <input type="radio" id="radioConsulta" name="funcao" value="consulta" onchange="ChangeSelect()">
+            <label for="radioConsulta" class="label">Consulta</label><br>
+        </div>
+        <br>
+        <div id="fatherDiv">
+            <div id="middleDiv" class="visible">
+                <form id="formCadastro" action="CadastroAnimaisServlet" method="post">
+                    <h1 style="margin: auto; ">CADASTRO</h1></br>
+                    <h2>Numero de identificacao:</h2>
+                    <input type="number" name="idAnimal" required maxlength="5" pattern="([0-9]|[0-9]|[0-9])">
+                    <h2>Tipo de Tratamento</h2>
+                    <input type="text" name="tipoTratamento" required>
+                    <h2>Quantidade de dias para tratamento</h2>         
+                    <input type="number" name="qtdDias" required>
+                    <input type="hidden" name="tipo" value="cadastro"/><br><br>
+                    </br></br></br>
+                    <input id="cadastrarBtn" type="submit" value="Cadastrar">
+                </form>
+            </div>
+
+            <div id="middleDiv" class="invisible">
+                <form id="formCadastro" action="CadastroAnimaisServlet" method="post">
+                    <h1 style="margin: auto; ">CONSULTA</h1></br>
+                    <h2>Identificacao do Animal</h2>
+                    <input type="number" name="idAnimalConsulta" maxlength="5" pattern="([0-9]|[0-9]|[0-9])"><br><br>
+                    <input type="hidden" name="tipo" value="consulta"/><br><br>
+                    <input id="cadastrarBtn" type="submit" value="Consultar">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
