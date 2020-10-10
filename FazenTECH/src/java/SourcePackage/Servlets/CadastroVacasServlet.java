@@ -203,10 +203,7 @@ public class CadastroVacasServlet extends HttpServlet {
                     RequestDispatcher dp = request.getRequestDispatcher("MonitoramentoVacas.html");
                     dp.include(request, response);
                 }
-
-            } else {
-                System.out.println("Busca não retornou resultados!!!");
-            }
+            } 
         }
     }
 

@@ -79,17 +79,18 @@ public class CadastroFuncionarioServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         String htmlRespone = "";
         PrintWriter writer = response.getWriter();
+        htmlRespone += "<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>";
+        htmlRespone += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
+        htmlRespone += "<script>";
+        htmlRespone += "$(document).ready(function(){";
 
         boolean _resultadoConsulta;
         DBConnection dbConnection = new DBConnection();
 
         _resultadoConsulta = dbConnection.CadastrarUsuario(login, senha);
-        
+
         if (_resultadoConsulta) {
-            htmlRespone += "<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>";
-            htmlRespone += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
-            htmlRespone += "<script>";
-            htmlRespone += "$(document).ready(function(){";
+
             htmlRespone += "swal ('Cadastro Realizado com Sucesso!', ' Prossiga para login ' , 'success' )";
             htmlRespone += "});";
             htmlRespone += "</script>";
@@ -99,10 +100,7 @@ public class CadastroFuncionarioServlet extends HttpServlet {
             dp.include(request, response);
 
         } else {
-            htmlRespone += "<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>";
-            htmlRespone += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
-            htmlRespone += "<script>";
-            htmlRespone += "$(document).ready(function(){";
+
             htmlRespone += "swal ('Login ou senha invalidos!!!', ' Tente Novamente ' , 'error' )";
             htmlRespone += "});";
             htmlRespone += "</script>";
