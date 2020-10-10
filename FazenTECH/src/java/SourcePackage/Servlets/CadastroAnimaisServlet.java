@@ -162,7 +162,7 @@ public class CadastroAnimaisServlet extends HttpServlet {
 
                     htmlResponse = "<br>";
                     htmlResponse += "<div id='divTable'>";
-                    htmlResponse += "<table class='w3 table w3-card-4'>";
+                    htmlResponse += "<table>";
                     htmlResponse += "<tr>";
                     htmlResponse += "<td>Identificacao Animal</td>";
                     htmlResponse += "<td>Tratamento</td>";

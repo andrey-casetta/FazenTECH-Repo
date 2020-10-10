@@ -1,6 +1,7 @@
 package Classes;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -65,6 +66,7 @@ public class DBConnection {
 
                     Usuario usu = new Usuario(idPessoa, login, senha, nome, cpf, dataNasc, tel);
                     usu.setLogado(true);
+                    Usuario.setLogin(login);
                     Usuario.setIdPessoa(idPessoa);
 
                 } else {
@@ -120,7 +122,8 @@ public class DBConnection {
 
         if (isConnected) {
             try {
-                String sql = "insert into vaca_leiteira values (" + _qtdLeite + "," + new java.sql.Date(_data.getDate()) + "," + GetUsuario() + "," + _idVaca + ")";
+
+                String sql = "insert into vaca_leiteira values (" + _idVaca + "," + _qtdLeite + ",'" + _data + "','" + Usuario.getLogin() + "')";
                 if (!con.isClosed()) {
                     PreparedStatement ps = con.prepareStatement(sql);
                     ps.executeUpdate();
@@ -136,38 +139,56 @@ public class DBConnection {
         return done;
     }
 
-    public List<String> ConsultarVaca(int _idVaca, String _login) {
+    public List<List<String>> ConsultarVaca(int _idVaca, String _login) {
         Connect();
-        List<String> list = new ArrayList();
+        List<List<String>> mainList = new ArrayList();
 
         if (isConnected) {
             try {
-                String sql = "select ID_VACA, QTD_LETE, HORARIO, NUMERO_IDENT, LOGIN_USUARIO from vaca_leiteira v inner join usuario u on v.NUMERO_IDENT = " + _idVaca + " AND u.login_usuario = '" + _login + "'";
+                String sql = "";
+
+                if (_idVaca != 0 && !_login.equals("")) {
+                    sql = "select * from vaca_leiteira where NUMERO_IDENT = " + _idVaca + " AND login_usuario = '" + _login + "'";
+                } else if (_idVaca != 0 && _login.equals("")) {
+                    sql = "select * from vaca_leiteira where NUMERO_IDENT = " + _idVaca;
+                } else if (_idVaca == 0 && !_login.equals("")) {
+                    sql = "select * from vaca_leiteira where login_usuario = '" + _login + "'";
+                } else {
+                    sql = "select * from vaca_leiteira";
+                }
+
                 if (!con.isClosed()) {
                     PreparedStatement ps = con.prepareStatement(sql);
                     ResultSet rs = ps.executeQuery();
 
-                    if (rs.next()) {
+                    while (rs.next()) {
+                        List<String> list = new ArrayList();
+                        String sLoginUsuario = rs.getString("LOGIN_USUARIO");
+                        int idVaca = rs.getInt("IDENTIFICACAO");
+                        float qtdLeite = (float) rs.getDouble("QTD_LEITE");
 
-                        int idVaca = rs.getInt("NUMERO_IDENT");
-                        float qtdLeite = (float) rs.getDouble("QTD_LETE");
-                        Date data = rs.getDate("HORARIO");
+                        Timestamp data = rs.getTimestamp("HORARIO");
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
                         String sQtdLeite = Float.toString(qtdLeite);
-                        String sData = data.toString();
+                        String sData = formatter.format(data);
                         String sIdVaca = Integer.toString(idVaca);
+
                         list.add(sIdVaca);
                         list.add(sQtdLeite);
                         list.add(sData);
+                        list.add(sLoginUsuario);
 
-                        con.close();
+                        mainList.add(list);
                     }
+                    rs.close();
+                    con.close();
                 }
             } catch (SQLException ex) {
                 System.out.println("SQLException: " + ex.getMessage());
             }
         }
-        return list;
+        return mainList;
     }
 
     public boolean CadastrarUsuario(String login, String senha) {

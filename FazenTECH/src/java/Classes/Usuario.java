@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Usuario extends Pessoa  {
 
-    public String getLogin() {
+    public static String getLogin() {
         return _login;
     }
 
@@ -37,7 +37,12 @@ public class Usuario extends Pessoa  {
         Usuario._idPessoa = _idPessoa;
     }
 
-    private String _login;
+    private static String _login;
+
+    public static void setLogin(String _login) {
+        Usuario._login = _login;
+    }
+    
     private String _senha;
     private static boolean _logado;
     private static int _idPessoa;
