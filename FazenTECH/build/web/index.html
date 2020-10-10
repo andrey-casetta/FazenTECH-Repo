@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>FazenTECH - Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilo.css">
+
+    </head>
+    <body style="background-image: url('img/bg1.jpg'); background-repeat: no-repeat; size: 100%; background-size: 100% 100%; background-attachment: fixed;">
+        <div id="mainLogin">
+            <h1>FazenTECH</h1>
+            <h2>Informe os dados para acessar o sistema:</h2>
+            <form name="loginForm" method="post" action="ReceiverLoginServlet">
+                <section>
+                    <div id="leftDiv">
+                        <span class="label">Usuário:</span></br></br>
+                        <input class="inputText" type="text" name="username"/></br></br>
+                        <span class="label">Senha: </span></br></br>
+                        <input class="inputText" type="password" name="password"/></br></br>
+                    </div>
+                    </br></br>
+                    <div>
+                        <input class="btn" type="submit" value="Login" />
+                        <input class="btn" type="button" value="Cadastrar" onclick="location.href = 'ConsultarCPF.html'"/>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>FazenTECH - Consulta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilo.css">
+
+    </head>
+    <body style="background-image: url('img/bg2.jpg'); background-repeat: no-repeat; size: 100%; background-size: 100% 100%; background-attachment: fixed;">
+        <div id="mainLogin">
+            <h1>FazenTECH</h1>
+            <h2>Para realizar novo cadastro de Usuário é necessário que o CPF esteja cadastrado no sistema</h2></br>
+            <h2>informe o mesmo para prosseguir:</h2>
+            <form name="loginForm" method="post" action="ReceiverCadastroServlet">
+                <section>
+                    <div id="leftDiv">
+                        <span style="font-size: 30px">CPF</span></br></br>
+                        <input type="text" name="cpf"/><br/>
+                    </div>
+                    </br></br>
+                    <div>
+                        <input class="btn" type="submit" value="Consultar" />
+                    </div>
+                </section>
+            </form>
+        </div>
+    </body>
+</html>
